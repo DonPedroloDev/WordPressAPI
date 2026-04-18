@@ -1,0 +1,17 @@
+[project]
+name = "wordpressapi"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Forever Park",email = "140984288+foreverpark@users.noreply.github.com"}
+]
+requires-python = ">=3.14"
+dependencies = [
+    "woocommerce (>=3.0.0,<4.0.0)",
+    "fastapi[standard] (>=0.136.0,<0.137.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
