@@ -71,17 +71,6 @@ def get_wc_product_id_by_sku(sku):
     return None
 
 
-def order_exists_in_wc(odoo_id: int) -> bool:
-    try:
-        response = wcapi.get("orders", params={
-            "meta_key": "odoo_id",
-            "meta_value": odoo_id
-        })
-        return response.status_code == 200 and len(response.json()) > 0
-    except:
-        return False
-
-
 def transform_odoo_to_wc(order, models, uid):
     line_items = []
 
@@ -125,19 +114,12 @@ def sync_orders():
 
         for order in odoo_orders:
 
-            if order_exists_in_wc(order["id"]):
-                results.append({
-                    "odoo_order": order["name"],
-                    "status": "skipped"
-                })
-                continue
-
             wc_order = transform_odoo_to_wc(order, models, uid)
 
             wc_order["meta_data"] = [
                 {
                     "key": "odoo_id",
-                    "value": order["id"]
+                    "value": f"{order['id']}-{order['name']}"
                 }
             ]
 
