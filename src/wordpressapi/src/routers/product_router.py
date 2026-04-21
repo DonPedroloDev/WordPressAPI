@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import HTTPException
 from fastapi import APIRouter
 from ...dependencies import wcapi
 
