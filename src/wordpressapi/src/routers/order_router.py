@@ -3,10 +3,10 @@ from fastapi import APIRouter
 from ...dependencies import wcapi
 
 router = APIRouter()
-@router.get("/orders/")
-def get_subjects():
+@router.get("/orders")
+def get_orders():
   try:
-    response = wcapi.get("orders", params={"per_page": 10})
+    response = wcapi.get("orders")
     if response.status_code == 200:
       orders = response.json()
       return orders

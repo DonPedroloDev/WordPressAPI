@@ -1,14 +1,8 @@
 from fastapi import APIRouter, HTTPException
-from ...dependencies import wcapi
+from ...dependencies import wcapi, ODOO_API_KEY, ODOO_DB, ODOO_URL, ODOO_USER
 import xmlrpc.client
 
 router = APIRouter()
-
-# CONFIG ODOO
-ODOO_URL = "http://localhost:8069"
-ODOO_DB = "Test1"
-ODOO_USER = "qw@gm.com"
-ODOO_API_KEY = "tu_api_key"
 
 
 def connect_odoo():
@@ -104,7 +98,7 @@ def transform_odoo_to_wc(order, models, uid):
     }
 
 
-@router.post("/sync-orders/")
+@router.post("/sync/orders")
 def sync_orders():
     try:
         uid, models = connect_odoo()

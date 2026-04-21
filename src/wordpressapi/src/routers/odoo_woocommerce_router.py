@@ -2,24 +2,9 @@ import xmlrpc.client
 from typing import Any, cast
 
 from fastapi import APIRouter
-from woocommerce import API
+from ...dependencies import ODOO_API_KEY, ODOO_DB, ODOO_URL, ODOO_USER, wcapi
 
 router = APIRouter()
-
-# Odoo (completa estos datos con tu instancia real)
-ODOO_URL = "http://localhost:8069"
-ODOO_DB = "Test1"
-ODOO_USER = "qw@gm.com"
-ODOO_API_KEY = "bcead35994119a6ed2869e9644749f11452b5b4d"
-
-# WooCommerce
-wcapi = API(
-    url="http://localhost:8080",
-    consumer_key="ck_fa2863c2634c9be27ad5efc54af4bd6655d413b3",
-    consumer_secret="cs_e0364e080f98589b886b2ab38be87bd4c9726f1c",
-    version="wc/v3",
-    timeout=30,
-)
 
 
 def _get_odoo_products() -> list[dict[str, Any]]:
@@ -109,7 +94,7 @@ def _sync_one_product(product: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-@router.get("/SyncProductsOdooConWooCommerce/")
+@router.post("/sync/products")
 def sincronizar_odoo_con_woocommerce():
     try:
         products = _get_odoo_products()

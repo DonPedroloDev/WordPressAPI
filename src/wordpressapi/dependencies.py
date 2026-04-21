@@ -1,10 +1,18 @@
 from woocommerce import API
+import os
+from dotenv import load_dotenv
 
-# Configuración de la conexión
+load_dotenv()
+
 wcapi = API(
-    url="http://localhost:8080", # Asegúrate de que el puerto sea el correcto (8080)
-    consumer_key="ck_b94f8db11dba9585630408e11415e45a7fd843f9",
-    consumer_secret="cs_2d5c790adfaf1160a7ea7633101f5360ffbee6b5",
+    url = os.getenv("WOOCOMMERCE_URL"),
+    consumer_key = os.getenv("WOOCOMMERCE_CONSUMER_KEY"),
+    consumer_secret = os.getenv("WOOCOMMERCE_SECRET_KEY"),
     version="wc/v3",
     timeout=20
 )
+
+ODOO_URL = os.getenv("ODOO_URL")
+ODOO_DB = os.getenv("ODOO_DB")
+ODOO_USER = os.getenv("ODOO_USER")
+ODOO_API_KEY = os.getenv("ODOO_API_KEY")
