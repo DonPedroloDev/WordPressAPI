@@ -12,9 +12,7 @@ router = APIRouter()
 
 @router.get("/products")
 async def get_productos(page: int = 1, per_page: int = 20):
-    response = await wcapi.get(
-        f"{WC_API}/products",
-        auth=(WC_KEY, WC_SECRET),
+    response = wcapi.get("products",
         params={"page": page, "per_page": per_page}
         )
 
